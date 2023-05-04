@@ -1,0 +1,17 @@
+{
+  "name": "pino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "postinstall": "patch-package"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pino": "^8.12.1",
+    "patch-package": "^7.0.0"
+  }
+}

@@ -1,0 +1,78 @@
+diff --git a/node_modules/pino/pino.d.ts b/node_modules/pino/pino.d.ts
+index 895bc4e..5e9caec 100644
+--- a/node_modules/pino/pino.d.ts
++++ b/node_modules/pino/pino.d.ts
+@@ -788,7 +788,7 @@ declare namespace pino {
+  * relative protocol is enabled. Default: process.stdout
+  * @returns a new logger instance.
+  */
+-declare function pino<Options extends LoggerOptions | DestinationStream>(optionsOrStream?: Options): Logger<Options>;
++declare function pino<Options extends pino.LoggerOptions | pino.DestinationStream>(optionsOrStream?: Options): pino.Logger<Options>;
+ 
+ /**
+  * @param [options]: an options object
+@@ -796,56 +796,11 @@ declare function pino<Options extends LoggerOptions | DestinationStream>(options
+  * relative protocol is enabled. Default: process.stdout
+  * @returns a new logger instance.
+  */
+-declare function pino<Options extends LoggerOptions>(options: Options, stream: DestinationStream): Logger<Options>;
+-
+-
+-// Pass through all the top-level exports, allows `import {version} from "pino"`
+-// Constants and functions
+-export const destination: typeof pino.destination;
+-export const transport: typeof pino.transport;
+-export const multistream: typeof pino.multistream;
+-export const levels: typeof pino.levels;
+-export const stdSerializers: typeof pino.stdSerializers;
+-export const stdTimeFunctions: typeof pino.stdTimeFunctions;
+-export const symbols: typeof pino.symbols;
+-export const version: typeof pino.version;
+-
+-// Types
+-export type Bindings = pino.Bindings;
+-export type DestinationStreamWithMetadata = pino.DestinationStreamWithMetadata;
+-export type Level = pino.Level;
+-export type LevelWithSilent = pino.LevelWithSilent;
+-export type LevelChangeEventListener = pino.LevelChangeEventListener;
+-export type LogDescriptor = pino.LogDescriptor;
+-export type Logger<Options = LoggerOptions> = pino.Logger<Options>;
+-export type SerializedError = pino.SerializedError;
+-export type SerializerFn = pino.SerializerFn;
+-export type SerializedRequest = pino.SerializedRequest;
+-export type SerializedResponse = pino.SerializedResponse;
+-export type WriteFn = pino.WriteFn;
+-
+-// Interfaces
+-export interface BaseLogger extends pino.BaseLogger {}
+-export interface ChildLoggerOptions extends pino.ChildLoggerOptions {}
+-export interface DestinationStream extends pino.DestinationStream {}
+-export interface LevelMapping extends pino.LevelMapping {}
+-export interface LogEvent extends pino.LogEvent {}
+-export interface LogFn extends pino.LogFn {}
+-export interface LoggerOptions extends pino.LoggerOptions {}
+-export interface MultiStreamOptions extends pino.MultiStreamOptions {}
+-export interface MultiStreamRes extends pino.MultiStreamRes {}
+-export interface StreamEntry extends pino.StreamEntry {}
+-export interface TransportBaseOptions extends pino.TransportBaseOptions {}
+-export interface TransportMultiOptions extends pino.TransportMultiOptions {}
+-export interface TransportPipelineOptions extends pino.TransportPipelineOptions {}
+-export interface TransportSingleOptions extends pino.TransportSingleOptions {}
+-export interface TransportTargetOptions extends pino.TransportTargetOptions {}
+-
+-// Bundle all top level exports into a namespace, then export namespace both
+-// as default (`import pino from "pino"`) and named variable
+-// (`import {pino} from "pino"`).
+-export { pino as default, pino };
+-// Export just the type side of the namespace as "P", allows
+-// `import {P} from "pino"; const log: P.Logger;`.
+-// (Legacy support for early 7.x releases, remove in 8.x.)
+-export type { pino as P };
++declare function pino<Options extends pino.LoggerOptions>(options: Options, stream: pino.DestinationStream): pino.Logger<Options>;
++
++declare const Module: typeof pino & {
++    pino: typeof pino
++}
++
++// this is the way to accurately represent a CJS module
++export = Module
